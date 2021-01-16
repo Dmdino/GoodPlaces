@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D86919AD25B353FA00BF325E /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86919AC25B353FA00BF325E /* Place.swift */; };
 		D8EB084525B30E6100F906D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB084425B30E6100F906D1 /* AppDelegate.swift */; };
 		D8EB084725B30E6100F906D1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB084625B30E6100F906D1 /* SceneDelegate.swift */; };
 		D8EB084E25B30E6600F906D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8EB084D25B30E6600F906D1 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D86919AC25B353FA00BF325E /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		D8EB084125B30E6100F906D1 /* GoodPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoodPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8EB084425B30E6100F906D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8EB084625B30E6100F906D1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D86919AB25B3539700BF325E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D86919AC25B353FA00BF325E /* Place.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		D8EB083825B30E6100F906D1 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +111,7 @@
 		D8EB084325B30E6100F906D1 /* GoodPlaces */ = {
 			isa = PBXGroup;
 			children = (
+				D86919AB25B3539700BF325E /* Model */,
 				D8EB089225B317FA00F906D1 /* Utils */,
 				D8EB088925B3133A00F906D1 /* Cells */,
 				D8EB087D25B3113800F906D1 /* Controllers */,
@@ -295,6 +306,7 @@
 				D8EB088B25B3137C00F906D1 /* GoodPlaceCell.swift in Sources */,
 				D8EB087F25B3115B00F906D1 /* MainVC.swift in Sources */,
 				D8EB084525B30E6100F906D1 /* AppDelegate.swift in Sources */,
+				D86919AD25B353FA00BF325E /* Place.swift in Sources */,
 				D8EB089425B3181C00F906D1 /* AutoLayout.swift in Sources */,
 				D8EB084725B30E6100F906D1 /* SceneDelegate.swift in Sources */,
 			);

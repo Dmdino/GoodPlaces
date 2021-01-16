@@ -28,7 +28,7 @@ class MainVC: UIViewController {
         view.addSubview(tabelView)
         
         tabelView.frame = view.bounds
-        tabelView.rowHeight = 80
+        tabelView.rowHeight = 85
         tabelView.delegate = self
         tabelView.dataSource = self
         tabelView.separatorStyle = .none
@@ -53,6 +53,8 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
         
         cell.textLabel?.text = restaurantNames[indexPath.row]
         cell.imageView?.image = UIImage(named: restaurantNames[indexPath.row])
+        cell.imageView?.layer.cornerRadius = cell.frame.height / 2
+        cell.imageView?.clipsToBounds = true
         
         return cell
     }
