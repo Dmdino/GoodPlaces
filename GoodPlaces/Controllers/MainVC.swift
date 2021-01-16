@@ -15,6 +15,8 @@ class MainVC: UIViewController {
     
     let restaurantNames = ["Шок", "Бочка", "Балкан Гриль", "Классик"]
     
+    let placeImageView = CustomImageView(frame: .zero)
+    
     let tabelView = UITableView()
 
     override func viewDidLoad() {
@@ -51,10 +53,8 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: GoodPlaceCell.reuseID, for: indexPath) as! GoodPlaceCell
         
-        cell.textLabel?.text = restaurantNames[indexPath.row]
-        cell.imageView?.image = UIImage(named: restaurantNames[indexPath.row])
-        cell.imageView?.layer.cornerRadius = cell.frame.height / 2
-        cell.imageView?.clipsToBounds = true
+        cell.nameLabel.text = restaurantNames[indexPath.row]
+        cell.placeImage.image = UIImage(named: restaurantNames[indexPath.row])
         
         return cell
     }
