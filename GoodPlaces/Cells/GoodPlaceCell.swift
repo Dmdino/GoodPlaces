@@ -43,6 +43,7 @@ class GoodPlaceCell: UITableViewCell {
         
         accessoryType = .detailDisclosureButton
         selectionStyle = .none
+        tintColor = .systemPurple
         
         placeImage.anchor(top: nil, leading: leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 0, left: 12, bottom: 0, right: 0), size: .init(width: 60, height: 60))
         placeImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true

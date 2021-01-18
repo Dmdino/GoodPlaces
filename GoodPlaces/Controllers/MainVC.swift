@@ -20,6 +20,7 @@ class MainVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTabeleView()
+        configureUI()
     }
     
     // MARK: - Creating table view
@@ -35,8 +36,26 @@ class MainVC: UIViewController {
         
         tabelView.register(GoodPlaceCell.self, forCellReuseIdentifier: GoodPlaceCell.reuseID)
         
+    }
+    
+    private func configureUI() {
+    
         navigationController?.navigationBar.prefersLargeTitles = true
         title = "Good Places"
+        
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
+        navigationItem.rightBarButtonItem = addButton
+        navigationItem.rightBarButtonItem?.tintColor = .systemPurple
+    }
+    
+    @objc func addButtonTapped() {
+        
+        let destVC = AddPlaceController()
+        let navcontroller = UINavigationController(rootViewController: destVC)
+        present(navcontroller, animated: true, completion: nil)
+        //navigationController?.pushViewController(destVC, animated: true)
+                
+        print("Try to show addPlaceController ")
     }
 
 }
