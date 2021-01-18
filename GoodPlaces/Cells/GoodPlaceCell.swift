@@ -18,8 +18,16 @@ class GoodPlaceCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         configure()
+    }
+    
+    func setProperties(places: Place) {
+        
+        nameLabel.text = places.name
+        bodyLabel.text = places.location
+        secondryLabel.text = places.type
+        placeImage.image = UIImage(named: places.name ?? "")
+        
     }
     
     private func configure() {

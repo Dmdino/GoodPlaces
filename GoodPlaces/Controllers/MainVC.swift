@@ -13,9 +13,7 @@ class MainVC: UIViewController {
     
     // MARK: - Preferences
     
-    let restaurantNames = ["Шок", "Бочка", "Балкан Гриль", "Классик"]
-    
-    let placeImageView = CustomImageView(frame: .zero)
+    let places = Place.getPlaces()
     
     let tabelView = UITableView()
 
@@ -47,14 +45,15 @@ class MainVC: UIViewController {
 
 extension MainVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return restaurantNames.count
+        return places.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: GoodPlaceCell.reuseID, for: indexPath) as! GoodPlaceCell
         
-        cell.nameLabel.text = restaurantNames[indexPath.row]
-        cell.placeImage.image = UIImage(named: restaurantNames[indexPath.row])
+        let place = places[indexPath.row]
+        
+        cell.setProperties(places: place)
         
         return cell
     }
