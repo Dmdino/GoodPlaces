@@ -11,9 +11,18 @@ class AddPlaceController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.tableFooterView = UIView()
+        tableView.tableFooterView = UIView() // get rid of separtor
+        tableView.keyboardDismissMode = .interactive
+        tableView.backgroundColor = UIColor(white: 0.97, alpha: 1)
+        
         configureUI()
+        createDissmissKeyboard()
      
+    }
+    
+    func createDissmissKeyboard() {
+        let tap = UITapGestureRecognizer(target: self.tableView, action: #selector(UIView.endEditing(_:)))
+        view.addGestureRecognizer(tap)
     }
     
     private func configureUI() {
@@ -42,12 +51,20 @@ class AddPlaceController: UITableViewController {
         print("Try to save new place")
         
     }
+    
+    
 
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UIView()
-        header.backgroundColor = .systemBackground
+        
+        let imageView = CustomEmptyView(frame: .zero)
+        imageView.contentMode = .scaleAspectFit
+        
+        header.addSubview(imageView)
+        
+        imageView.anchor(top:header.topAnchor, leading: header.leadingAnchor, bottom: header.bottomAnchor, trailing: header.trailingAnchor, padding: .zero, size: .init(width: 0, height: 0))
         
         if section == 0 {
             return header
@@ -59,8 +76,11 @@ class AddPlaceController: UITableViewController {
             headerLabel.text = "Name"
         case 2:
             headerLabel.text = "Adress"
-        default:
+        case 3:
             headerLabel.text = "Type"
+        default :
+            headerLabel.text = "Rate"
+        
         }
         return headerLabel
     }
@@ -75,7 +95,7 @@ class AddPlaceController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         
-        return 4
+        return 5
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -84,9 +104,25 @@ class AddPlaceController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.section == 4 {
+            let footer = UITableViewCell()
+            footer.selectionStyle = .none
+            footer.backgroundColor = .systemYellow
+            return footer
+        }
+        
         let cell = SettingsCell(style: .default, reuseIdentifier: nil)
     
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 4 {
+            return 200
+        }
+        
+        return 60
     }
 
 }

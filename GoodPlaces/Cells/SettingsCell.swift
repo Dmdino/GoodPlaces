@@ -26,6 +26,8 @@ class SettingsCell: UITableViewCell {
     
     let textField: UITextField = {
         let tf = SettingsTextField()
+        tf.keyboardType = .default
+        tf.returnKeyType = .done
         tf.placeholder = "Enter text"
         
         return tf

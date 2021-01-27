@@ -53,6 +53,7 @@ class MainVC: UIViewController {
         let destVC = AddPlaceController()
         let navcontroller = UINavigationController(rootViewController: destVC)
         present(navcontroller, animated: true, completion: nil)
+        navcontroller.modalTransitionStyle = .crossDissolve
         //navigationController?.pushViewController(destVC, animated: true)
                 
         print("Try to show addPlaceController ")
@@ -71,7 +72,6 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: GoodPlaceCell.reuseID, for: indexPath) as! GoodPlaceCell
         
         let place = places[indexPath.row]
-        
         cell.setProperties(places: place)
         
         return cell
