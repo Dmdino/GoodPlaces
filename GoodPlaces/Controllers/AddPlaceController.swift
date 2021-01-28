@@ -27,7 +27,7 @@ class AddPlaceController: UITableViewController {
     
     private func configureUI() {
         
-        navigationController?.navigationBar.prefersLargeTitles = true
+        //navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Add new Place"
         
         let cancelButon = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleDone))
@@ -70,12 +70,17 @@ class AddPlaceController: UITableViewController {
             return header
         }
         
+        // MARK: - Set up header labels for sections
         let headerLabel = HeaderLabel()
+        headerLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        headerLabel.textColor = .systemPurple
+        
+        // MARK: - Switch section
         switch section {
         case 1:
             headerLabel.text = "Name"
         case 2:
-            headerLabel.text = "Adress"
+            headerLabel.text = "Address"
         case 3:
             headerLabel.text = "Type"
         default :
@@ -89,20 +94,21 @@ class AddPlaceController: UITableViewController {
         if section == 0 {
             return 300
         }
-        
         return 40
     }
-
+    
+    // MARK: - Sections
     override func numberOfSections(in tableView: UITableView) -> Int {
-        
         return 5
     }
-
+    
+    // MARK: - Rows in section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return section == 0 ? 0 : 1
     }
     
+    // MARK: - Cell for row at
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 4 {
@@ -117,12 +123,11 @@ class AddPlaceController: UITableViewController {
         return cell
     }
     
+    // MARK: - Hight for row
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 4 {
             return 200
         }
-        
         return 60
     }
-
 }

@@ -14,7 +14,6 @@ class MainVC: UIViewController {
     // MARK: - Preferences
     
     let places = Place.getPlaces()
-    
     let tabelView = UITableView()
 
     override func viewDidLoad() {
@@ -35,11 +34,9 @@ class MainVC: UIViewController {
         tabelView.separatorStyle = .none
         
         tabelView.register(GoodPlaceCell.self, forCellReuseIdentifier: GoodPlaceCell.reuseID)
-        
     }
     
     private func configureUI() {
-    
         navigationController?.navigationBar.prefersLargeTitles = true
         title = "Good Places"
         
@@ -49,16 +46,13 @@ class MainVC: UIViewController {
     }
     
     @objc func addButtonTapped() {
-        
-        let destVC = AddPlaceController()
+        let destVC = NewPlaceVC()
         let navcontroller = UINavigationController(rootViewController: destVC)
         present(navcontroller, animated: true, completion: nil)
         navcontroller.modalTransitionStyle = .crossDissolve
+        //navcontroller.modalPresentationStyle = .fullScreen
         //navigationController?.pushViewController(destVC, animated: true)
-                
-        print("Try to show addPlaceController ")
     }
-
 }
 
 // MARK: - Tabeview Extension

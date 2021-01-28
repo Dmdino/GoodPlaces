@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingsCell: UITableViewCell {
+class SettingsCell: UITableViewCell, UITextFieldDelegate {
     
     class SettingsTextField: UITextField {
         
@@ -28,6 +28,7 @@ class SettingsCell: UITableViewCell {
         let tf = SettingsTextField()
         tf.keyboardType = .default
         tf.returnKeyType = .done
+        tf.autocapitalizationType = .sentences // The sentense starts from capital letter
         tf.placeholder = "Enter text"
         
         return tf
@@ -35,13 +36,18 @@ class SettingsCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.textField.delegate = self
         
         contentView.isUserInteractionEnabled = true
         
         addSubview(textField)
         textField.fillSuperview()
         
-        selectionStyle = .none
+        //selectionStyle = .none
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
     }
     
     required init?(coder: NSCoder) {
