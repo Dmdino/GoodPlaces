@@ -46,12 +46,10 @@ class MainVC: UIViewController {
     }
     
     @objc func addButtonTapped() {
-        let destVC = NewPlaceVC()
+        let destVC = AddNewPlaceController()
         let navcontroller = UINavigationController(rootViewController: destVC)
+        navcontroller.modalPresentationStyle = .fullScreen
         present(navcontroller, animated: true, completion: nil)
-        navcontroller.modalTransitionStyle = .crossDissolve
-        //navcontroller.modalPresentationStyle = .fullScreen
-        //navigationController?.pushViewController(destVC, animated: true)
     }
 }
 

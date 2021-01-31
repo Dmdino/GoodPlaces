@@ -18,6 +18,7 @@ class CustomEmptyView: UIImageView {
     
     private func configure() {
         clipsToBounds = true
+        contentMode = .scaleAspectFill
         image = placeholderImage
         backgroundColor = .lightGray
     }
