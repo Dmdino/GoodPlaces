@@ -17,32 +17,11 @@ class AddNewPlaceController: UITableViewController, UIImagePickerControllerDeleg
     // MARK: - Selectors
     
     @objc func handleSelectPhoto(button: UIButton) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        present(imagePicker, animated: true, completion: nil)
+        self.createActionSheet()
     }
     
     @objc private func handleDone() { dismiss(animated: true, completion: nil) }
     @objc private func handleSave() { print("Try to save new place") }
-    
-    // MARK: - Image Picker Controller
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        let selectedImage = info[.originalImage] as? UIImage
-        imageButton.setImage(selectedImage?.withRenderingMode(.alwaysOriginal), for: .normal)
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func createButton(selector: Selector) -> UIButton {
-        let button = UIButton(type: .system)
-        button.setImage(#imageLiteral(resourceName: "Photo").withRenderingMode(.alwaysOriginal), for: .normal)
-        button.clipsToBounds = true
-        button.imageView?.contentMode = .scaleAspectFill
-        button.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        button.addTarget(self, action: selector, for: .touchUpInside)
-        return button
-    }
 
     // MARK: - Life cycle
     
@@ -65,8 +44,6 @@ class AddNewPlaceController: UITableViewController, UIImagePickerControllerDeleg
     // MARK: - Tableview functions
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        
         if section == 0 {
             let header = UIView()
 
@@ -93,12 +70,12 @@ class AddNewPlaceController: UITableViewController, UIImagePickerControllerDeleg
         default :
             headerLabel.text = "Rate"
         }
-        
         return headerLabel
 }
     
+    // MARK: - TableView DataSource
+    
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
         if section == 0 {
             return 300
         }
@@ -114,21 +91,18 @@ class AddNewPlaceController: UITableViewController, UIImagePickerControllerDeleg
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         if indexPath.section == 4 {
             let ratingCell = RatingCell(style: .default, reuseIdentifier: nil)
             return ratingCell
         }
         
         let cell = SettingsCell(style: .default, reuseIdentifier: nil)
-        
         return cell
     }
     
     // MARK: - Setup layout
     
     fileprivate func setupNavigationItems() {
-        
         navigationItem.title = "Add new Place"
         navigationController?.navigationBar.prefersLargeTitles = true
         
@@ -139,6 +113,55 @@ class AddNewPlaceController: UITableViewController, UIImagePickerControllerDeleg
         navigationItem.leftBarButtonItem = saveButton
         navigationItem.leftBarButtonItem?.tintColor = .systemPurple
     }
+}
 
+// MARK: - UIImagePickerController and Helper functions
 
+extension AddNewPlaceController {
+
+    func takePhoto(source: UIImagePickerController.SourceType) {
+        if UIImagePickerController.isSourceTypeAvailable(source) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = source
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+
+        let selectedImage = info[.editedImage] as? UIImage
+        imageButton.setImage(selectedImage?.withRenderingMode(.alwaysOriginal), for: .normal)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func createButton(selector: Selector) -> UIButton {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "Photo").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.clipsToBounds = true
+        button.imageView?.contentMode = .scaleAspectFill
+        button.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        button.addTarget(self, action: selector, for: .touchUpInside)
+        return button
+    }
+    
+    func createActionSheet() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let camera = UIAlertAction(title: "Camera", style: .default) { (_) in
+            self.takePhoto(source: .camera)
+        }
+
+        let  photo = UIAlertAction(title: "Photo", style: .default) { (_) in
+            self.takePhoto(source: .photoLibrary)
+        }
+
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        actionSheet.addAction(camera)
+        actionSheet.addAction(photo)
+        actionSheet.addAction(cancel)
+        present(actionSheet, animated: true, completion: nil)
+    }
 }
