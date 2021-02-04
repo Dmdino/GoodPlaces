@@ -147,17 +147,30 @@ extension AddNewPlaceController {
     }
     
     func createActionSheet() {
+        
+        let cameraIcon = #imageLiteral(resourceName: "camera")
+        let photoIcon = #imageLiteral(resourceName: "photo")
+        
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         let camera = UIAlertAction(title: "Camera", style: .default) { (_) in
             self.takePhoto(source: .camera)
         }
+        camera.setValue(cameraIcon, forKey: "image")
+        camera.setValue(UIColor.systemPurple, forKey: "titleTextColor")
+        camera.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+        cameraIcon.withTintColor(.systemPurple)
 
         let  photo = UIAlertAction(title: "Photo", style: .default) { (_) in
             self.takePhoto(source: .photoLibrary)
         }
+        photo.setValue(photoIcon, forKey: "image")
+        photo.setValue(UIColor.systemPurple, forKey: "titleTextColor")
+        photo.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+        photoIcon.withTintColor(.systemPurple)
 
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        cancel.setValue(UIColor.systemRed, forKey: "titleTextColor")
         
         actionSheet.addAction(camera)
         actionSheet.addAction(photo)
